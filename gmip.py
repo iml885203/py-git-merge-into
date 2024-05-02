@@ -8,8 +8,7 @@ def run_git_command(command, *args):
 def check_for_uncommitted_changes():
     """Check for uncommitted changes."""
     if run_git_command('diff', '--quiet').returncode != 0:
-        click.echo(click.style("[Error] There are uncommitted changes in the current branch.", fg='red'))
-        raise click.Abort()
+        raise click.ClickException("There are uncommitted changes in the current branch.")
 
 def git_checkout(branch):
     """Checkout the given branch."""
@@ -19,38 +18,36 @@ def git_fetch(branch):
     """Fetch the given branch."""
     fetch_process = run_git_command('fetch', 'origin', branch)
     if fetch_process.returncode != 0:
-        click.echo(click.style(f"[Error] git fetch failed for branch '{branch}'.", fg='red'))
-        raise click.Abort()
+        raise click.ClickException(f"git fetch failed for branch '{branch}'.")
 
 def git_reset_hard(branch):
     """Reset the branch to its remote state."""
     reset_process = run_git_command('reset', '--hard', f'origin/{branch}')
     if reset_process.returncode != 0:
-        click.echo(click.style(f"[Error] git reset failed for branch '{branch}'.", fg='red'))
-        raise click.Abort()
+        raise click.ClickException(f"git reset failed for branch '{branch}'.")
+
     click.echo(click.style(reset_process.stdout))
 
 def git_merge(branch):
     """Merge the given branch into the current branch."""
     merge_process = run_git_command('merge', branch)
     merge_status = merge_process.returncode
+
     if merge_status != 0:
         click.echo(click.style(merge_process.stderr, fg='yellow'))
         run_git_command('merge', '--abort')
         if "CONFLICT" in merge_process.stderr:
-            click.echo(click.style(f"[Error] Merge conflict detected for branch '{branch}'.", fg='red'))
+#             click.echo(click.style(f"[Error] Merge conflict detected for branch '{branch}'.", fg='red'))
+            raise click.ClickException(f"Merge conflict detected for branch '{branch}'.")
         else:
-            click.echo(click.style(f"[Error] Merge failed for branch '{branch}'.", fg='red'))
-        raise click.Abort()
+            raise click.ClickException(f"Merge failed for branch '{branch}'.")
     click.echo(click.style(merge_process.stdout))
 
 def git_push(branch):
     """Push changes to the given branch."""
     push_process = run_git_command('push', 'origin', branch)
     if push_process.returncode != 0:
-        click.echo(click.style(f"[Error] git push failed for branch '{branch}'.", fg='red'))
-        raise click.Abort()
-    click.echo(click.style(f"[Success] Pushed changes to '{branch}' branch.", fg='green'))
+        raise click.ClickException(f"git push failed for branch '{branch}'.")
 
 @click.command()
 @click.argument('target_branch')
@@ -74,8 +71,8 @@ def gmip(target_branch):
         git_push(target_branch)
 
         click.echo(click.style(f"[Success] Merged changes from current branch to '{target_branch}' branch.", fg='green'))
-    except click.Abort:
-        pass
+    except click.ClickException as e:
+        click.echo(click.style(str(e), fg='red'))
 
 if __name__ == '__main__':
     gmip()
