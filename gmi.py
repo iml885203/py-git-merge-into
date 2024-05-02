@@ -1,5 +1,3 @@
-# hello.py
-
 import click
 import subprocess
 
@@ -51,14 +49,25 @@ def merge(target_branch):
 
     subprocess.run(['git', 'checkout', current_branch], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
+def push(target_branch):
+    click.echo(click.style(f"[Info] Pushing changes to '{target_branch}' branch...", fg='cyan'))
+
+    push_process = subprocess.run(['git', 'push', 'origin', target_branch])
+    push_status = push_process.returncode
+
+    if push_status != 0:
+        click.echo(click.style(f"[Error] git push failed for branch '{target_branch}'.", fg='red'))
+        raise click.Abort()
+
+    click.echo(click.style(f"[Success] Pushed changes to '{target_branch}' branch.", fg='green'))
 
 @click.command()
 @click.argument('target_branch')
-def gmi(target_branch):
-#     check()
+def gmip(target_branch):
+    check()
     pull(target_branch)
     merge(target_branch)
     click.echo(click.style(f"[Success] Merged changes from current branch to '{target_branch}' branch.", fg='green'))
 
 if __name__ == '__main__':
-    gmi()
+    gmip()
