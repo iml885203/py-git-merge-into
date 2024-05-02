@@ -71,7 +71,7 @@ def merge(target_branch):
         raise click.Abort()
 
     # 输出合并结果
-    click.echo(click.style(merge_process.stdout, fg='green'))
+    click.echo(click.style(merge_process.stdout))
 
     # 切换回当前分支
     subprocess.run(['git', 'checkout', current_branch], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
@@ -83,6 +83,7 @@ def gmi(target_branch):
 #     check()
     pull(target_branch)
     merge(target_branch)
+    click.echo(click.style(f"[Success] Merged changes from current branch to '{target_branch}' branch.", fg='green'))
 
 if __name__ == '__main__':
     gmi()
