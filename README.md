@@ -33,5 +33,5 @@ python gmip.py {branch}
 
 ### Build
 ```bash
-pyinstaller --onefile gmip.py gmi.py
+./build.sh
 ```
