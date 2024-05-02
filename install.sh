@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Copy the binary to /usr/local/bin
-sudo cp dist/hello /usr/local/bin/hello
+sudo cp dist/gmi /usr/local/bin/gmi
+sudo cp dist/gmip /usr/local/bin/gmip
 
-echo "Hello installed successfully!"
+echo "installed successfully!"
