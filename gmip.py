@@ -1,7 +1,8 @@
 import click
 from utils import check_branches_not_same, check_for_uncommitted_changes, git_checkout, git_fetch, git_reset_hard, git_merge, git_push
 
-@click.command()
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+@click.command(context_settings=CONTEXT_SETTINGS)
 @click.argument('target_branch')
 def gmip(target_branch):
     """Merge current branch to target branch and push."""
