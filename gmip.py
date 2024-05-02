@@ -72,7 +72,8 @@ def gmip(target_branch):
 
         click.echo(click.style(f"[Success] Merged changes from current branch to '{target_branch}' branch.", fg='green'))
     except click.ClickException as e:
-        click.echo(click.style(str(e), fg='red'))
+        click.echo(click.style(f"[Error] {str(e)}", fg='red'))
+
 
 if __name__ == '__main__':
     gmip()
