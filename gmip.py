@@ -28,6 +28,7 @@ def git_reset_hard(branch):
     if reset_process.returncode != 0:
         click.echo(click.style(f"[Error] git reset failed for branch '{branch}'.", fg='red'))
         raise click.Abort()
+    click.echo(click.style(reset_process.stdout))
 
 def git_merge(branch):
     """Merge the given branch into the current branch."""
