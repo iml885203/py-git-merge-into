@@ -4,7 +4,7 @@ from utils import check_branches_not_same, check_for_uncommitted_changes, git_ch
 @click.command()
 @click.argument('target_branch')
 def gmip(target_branch):
-    """Git Merge, Pull, and Push."""
+    """Merge current branch to target branch and push."""
     try:
         check_branches_not_same(target_branch)
         check_for_uncommitted_changes()
