@@ -28,11 +28,61 @@ def pull(target_branch):
 
     subprocess.run(['git', 'checkout', current_branch], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
+# Bash script
+# function merge_branch() {
+#   local current_branch=$(git symbolic-ref --short HEAD)
+#   local target_branch=$1
+#   git checkout $target_branch > /dev/null 2>&1
+#   local merge_output=$(git merge $current_branch) ret="$?"
+#   local merge_status=$ret
+#   if [ $merge_status -ne 0 ]; then
+#     warning_echo "$merge_output"
+#     git merge --abort
+#     git checkout $current_branch > /dev/null 2>&1
+#     if [[ $merge_output == *"CONFLICT"* ]]; then
+#       error_echo "Merge conflict detected for branch '${target_branch}'."
+#     else
+#       error_echo "Merge failed for branch '${target_branch}'."
+#     fi
+#     exit
+#   fi
+#   echo -e "$merge_output"
+#   git checkout $current_branch > /dev/null 2>&1
+# }
+def merge(target_branch):
+    current_branch = subprocess.check_output(['git', 'symbolic-ref', '--short', 'HEAD'], text=True).strip()
+
+    click.echo(click.style(f"[Info] Merging changes from '{current_branch}' to '{target_branch}' branch...", fg='cyan'))
+
+    # 切换到目标分支
+    subprocess.run(['git', 'checkout', target_branch], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+
+    # 执行合并操作
+    merge_process = subprocess.run(['git', 'merge', current_branch], capture_output=True, text=True)
+    merge_status = merge_process.returncode
+    if merge_status != 0:
+        click.echo(click.style(merge_process.stdout, fg='yellow'))
+        subprocess.run(['git', 'merge', '--abort'], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        subprocess.run(['git', 'checkout', current_branch], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        if "CONFLICT" in merge_process.stdout:
+            click.echo(click.style(f"[Error] Merge conflict detected for branch '{target_branch}'.", fg='red'))
+        else:
+            click.echo(click.style(f"[Error] Merge failed for branch '{target_branch}'.", fg='red'))
+        raise click.Abort()
+
+    # 输出合并结果
+    click.echo(click.style(merge_process.stdout, fg='green'))
+
+    # 切换回当前分支
+    subprocess.run(['git', 'checkout', current_branch], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+
+
 @click.command()
 @click.argument('target_branch')
 def gmi(target_branch):
 #     check()
     pull(target_branch)
+    merge(target_branch)
 
 if __name__ == '__main__':
     gmi()
