@@ -32,7 +32,7 @@ def git_reset_hard(branch):
     if reset_process.returncode != 0:
         raise click.ClickException(f"git reset failed for branch '{branch}'.")
 
-    click.echo(click.style(reset_process.stdout))
+    click.echo(reset_process.stdout)
 
 def git_merge(branch):
     """Merge the given branch into the current branch."""
@@ -46,11 +46,11 @@ def git_merge(branch):
             raise click.ClickException(f"Merge conflict detected for branch '{branch}'.")
         else:
             raise click.ClickException(f"Merge failed for branch '{branch}'.")
-    click.echo(click.style(merge_process.stdout))
+    click.echo(merge_process.stdout)
 
 def git_push(branch):
     """Push changes to the given branch."""
     push_process = run_git_command('push', 'origin', branch)
     if push_process.returncode != 0:
         raise click.ClickException(f"git push failed for branch '{branch}'.")
-    click.echo(click.style(push_process.stdout))
+    click.echo(push_process.stdout)
