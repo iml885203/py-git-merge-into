@@ -53,5 +53,4 @@ def git_push(branch):
     push_process = run_git_command('push', 'origin', branch)
     if push_process.returncode != 0:
         raise click.ClickException(f"git push failed for branch '{branch}'.")
-    click.echo(push_process.stdout)
-    click.echo(push_process.stderr)
+    click.echo(push_process.stderr) # git push output goes into stderr
