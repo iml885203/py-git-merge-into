@@ -3,7 +3,7 @@ import subprocess
 
 def run_git_command(command, *args):
     """Run a git command with given arguments."""
-    return subprocess.run(['git', command] + list(args), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    return subprocess.run(['git', command] + list(args), stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 
 def check_for_uncommitted_changes():
     """Check for uncommitted changes."""
@@ -31,12 +31,12 @@ def git_reset_hard(branch):
 
 def git_merge(branch):
     """Merge the given branch into the current branch."""
-    merge_process = run_git_command('merge', branch, capture_output=True)
+    merge_process = run_git_command('merge', branch)
     merge_status = merge_process.returncode
     if merge_status != 0:
-        click.echo(click.style(merge_process.stdout, fg='yellow'))
+        click.echo(click.style(merge_process.stderr, fg='yellow'))
         run_git_command('merge', '--abort')
-        if "CONFLICT" in merge_process.stdout:
+        if "CONFLICT" in merge_process.stderr:
             click.echo(click.style(f"[Error] Merge conflict detected for branch '{branch}'.", fg='red'))
         else:
             click.echo(click.style(f"[Error] Merge failed for branch '{branch}'.", fg='red'))
