@@ -1,4 +1,6 @@
 #!/bin/bash
 
-pyinstaller --onefile cli/gmip.py cli/gmi.py
+cd cli
+pyinstaller --onefile gmi.py gmi.py
 cp dist/gmip dist/gmi bin
+cd ..
