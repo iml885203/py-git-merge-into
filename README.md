@@ -6,19 +6,23 @@
 - gmi {branch}: current branch merge into {branch}
 - gmip {branch}: current branch merge into {branch} and push
 
+---
+
 ## Installation
 
+### CLI version
 ```bash
-./install.sh
+./install-cli.sh
 ```
 
 ## Uninstall
 
+### CLI version
 ```bash
-./uninstall.sh
+./uninstall-cli.sh
 ```
 
-## Development
+## Development CLI
 
 ### Install packages
 ```bash
@@ -33,5 +37,5 @@ python gmip.py {branch}
 
 ### Build
 ```bash
-./build.sh
+./cli/build.sh
 ```
