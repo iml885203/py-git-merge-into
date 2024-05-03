@@ -12,13 +12,12 @@
   * [Error Handle - Uncommitted changes](#error-handle---uncommitted-changes)
   * [Error Handle - Merge conflict](#error-handle---merge-conflict)
 - [Installation](#installation)
-  * [CLI version](#cli-version)
 - [Uninstall](#uninstall)
-  * [CLI version](#cli-version-1)
-- [Development CLI](#development-cli)
+- [Development](#development)
   * [Install packages](#install-packages)
   * [Run](#run)
   * [Build](#build)
+  * [Install Locally](#install-locally)
 
 <!-- tocstop -->
 
@@ -47,19 +46,17 @@ gmip {branch}
 
 ## Installation
 
-### CLI version
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/iml885203/git-merge-into/main/install-cli.sh)"
 ```
 
 ## Uninstall
 
-### CLI version
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/iml885203/git-merge-into/main/uninstall-cli.sh)"
 ```
 
-## Development CLI
+## Development
 
 ```
 git clone git@github.com:iml885203/git-merge-into.git
@@ -79,4 +76,9 @@ python gmip.py {branch}
 ### Build
 ```bash
 ./build-cli.sh
+```
+
+### Install Locally
+```bash
+./install.sh --local
 ```
