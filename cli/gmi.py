@@ -6,11 +6,11 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.argument('target_branch')
 def gmi(target_branch):
     """Merge current branch to target branch."""
-    try:
-        check_branches_not_same(target_branch)
-        check_for_uncommitted_changes()
+    current_branch = get_current_branch()
 
-        current_branch = get_current_branch()
+    try:
+        check_branches_not_same(current_branch, target_branch)
+        check_for_uncommitted_changes()
 
         click.echo(click.style(f"[Info] Pulling changes from '{target_branch}' branch...", fg='cyan'))
         git_checkout(target_branch)
@@ -27,7 +27,6 @@ def gmi(target_branch):
     except click.ClickException as e:
         git_checkout(current_branch)
         click.echo(click.style(f"[Error] {str(e)}", fg='red'))
-
 
 if __name__ == '__main__':
     gmi()

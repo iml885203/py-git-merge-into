@@ -5,9 +5,8 @@ def run_git_command(command, *args):
     """Run a git command with given arguments."""
     return subprocess.run(['git', command] + list(args), stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 
-def check_branches_not_same(target_branch):
+def check_branches_not_same(current_branch, target_branch):
     """Check if the current branch is not the same as the target branch."""
-    current_branch = run_git_command('rev-parse', '--abbrev-ref', 'HEAD').stdout.strip()
     if current_branch == target_branch:
         raise click.ClickException(f"Cannot merge the '{current_branch}' into '{target_branch}' branch.")
 

@@ -6,8 +6,10 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.argument('target_branch')
 def gmip(target_branch):
     """Merge current branch to target branch and push."""
+    current_branch = get_current_branch()
+
     try:
-        check_branches_not_same(target_branch)
+        check_branches_not_same(current_branch, target_branch)
         check_for_uncommitted_changes()
 
         current_branch = get_current_branch()
@@ -30,7 +32,6 @@ def gmip(target_branch):
     except click.ClickException as e:
         git_checkout(current_branch)
         click.echo(click.style(f"[Error] {str(e)}", fg='red'))
-
 
 if __name__ == '__main__':
     gmip()
