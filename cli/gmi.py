@@ -1,5 +1,5 @@
 import click
-from utils import check_branches_not_same, check_for_uncommitted_changes, git_checkout, git_fetch, git_reset_hard, git_merge, git_push
+from utils import check_branches_not_same, check_for_uncommitted_changes, get_current_branch, git_checkout, git_fetch, git_reset_hard, git_merge, git_push
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.command(context_settings=CONTEXT_SETTINGS)
