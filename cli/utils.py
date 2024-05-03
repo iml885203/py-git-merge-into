@@ -46,7 +46,7 @@ def git_merge(branch):
     if merge_status != 0:
         click.echo(click.style(merge_process.stderr, fg='yellow'))
         run_git_command('merge', '--abort')
-        if "CONFLICT" in merge_process.stderr:
+        if "CONFLICT" in merge_process.stdout:
             raise click.ClickException(f"Merge conflict detected for branch '{branch}'.")
         else:
             raise click.ClickException(f"Merge failed for branch '{branch}'.")

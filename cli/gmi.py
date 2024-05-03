@@ -11,21 +11,21 @@ def gmi(target_branch):
         check_for_uncommitted_changes()
 
         current_branch = get_current_branch()
-        click.echo(current_branch)
 
         click.echo(click.style(f"[Info] Pulling changes from '{target_branch}' branch...", fg='cyan'))
         git_checkout(target_branch)
         git_fetch(target_branch)
         git_reset_hard(target_branch)
-        git_checkout('-')  # Switch back to previous branch
+        git_checkout(current_branch)
 
         click.echo(click.style(f"[Info] Merging changes from current branch to '{target_branch}' branch...", fg='cyan'))
         git_checkout(target_branch)
-        git_merge('-')
-        git_checkout('-')  # Switch back to previous branch
+        git_merge(current_branch)
+        git_checkout(current_branch)
 
         click.echo(click.style(f"[Success] Merged changes from current branch to '{target_branch}' branch.", fg='green'))
     except click.ClickException as e:
+        git_checkout(current_branch)
         click.echo(click.style(f"[Error] {str(e)}", fg='red'))
 
 
