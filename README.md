@@ -3,35 +3,39 @@
 > Useful command, Colorful result!!!
 
 ## Table of Contents
-* [Usage](#usage)
-* [Example](#example)
-    * [Success](#success)
-    * [Error Handle - Missing branch name](#error-handle---missing-branch-name)
-    * [Error Handle - Uncommitted changes](#error-handle---uncommitted-changes)
-    * [Error Handle - Merge conflict](#error-handle---merge-conflict)
-* [Installation](#installation)
-    * [CLI version](#cli-version)
-* [Uninstall](#uninstall)
-    * [CLI version](#cli-version-1)
-* [Development CLI](#development-cli)
-    * [Install packages](#install-packages)
-    * [Run](#run)
-    * [Build](#build)
 
+<!-- toc -->
+
+- [Usage](#usage)
+- [Example](#example)
+  * [Success](#success)
+  * [Error Handle - Uncommitted changes](#error-handle---uncommitted-changes)
+  * [Error Handle - Merge conflict](#error-handle---merge-conflict)
+- [Installation](#installation)
+  * [CLI version](#cli-version)
+- [Uninstall](#uninstall)
+  * [CLI version](#cli-version-1)
+- [Development CLI](#development-cli)
+  * [Install packages](#install-packages)
+  * [Run](#run)
+  * [Build](#build)
+
+<!-- tocstop -->
 
 ## Usage
 - gmi {branch}: current branch merge into {branch}
 - gmip {branch}: current branch merge into {branch} and push
+
+```bash
+gmi {branch}
+gmip {branch}
+```
 
 ## Example
 
 ### Success
 
 ![](./readme/success.png)
-
-### Error Handle - Missing branch name
-
-![](./readme/missing-branch-name.png)
 
 ### Error Handle - Uncommitted changes
 
