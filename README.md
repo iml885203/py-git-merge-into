@@ -12,17 +12,21 @@
 
 ### CLI version
 ```bash
-./install-cli.sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/iml885203/git-merge-into/main/install-cli.sh)"
 ```
 
 ## Uninstall
 
 ### CLI version
 ```bash
-./uninstall-cli.sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/iml885203/git-merge-into/main/uninstall-cli.sh)"
 ```
 
 ## Development CLI
+
+```
+git clone git@github.com:iml885203/git-merge-into.git
+```
 
 ### Install packages
 ```bash
@@ -37,5 +41,5 @@ python gmip.py {branch}
 
 ### Build
 ```bash
-./cli/build.sh
+./build-cli.sh
 ```
