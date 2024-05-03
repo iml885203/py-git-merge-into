@@ -7,7 +7,6 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 def gmi(target_branch):
     """Merge current branch to target branch."""
     current_branch = get_current_branch()
-
     try:
         check_branches_not_same(current_branch, target_branch)
         check_for_uncommitted_changes()
