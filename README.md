@@ -1,4 +1,4 @@
-# gmip
+# Git Merge Into
 
 > Useful command, Colorful result!!!
 
