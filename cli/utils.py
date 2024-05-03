@@ -16,6 +16,10 @@ def check_for_uncommitted_changes():
     if run_git_command('diff', '--quiet').returncode != 0:
         raise click.ClickException("There are uncommitted changes in the current branch.")
 
+def get_current_branch():
+    """Get the current branch."""
+    return run_git_command('rev-parse', '--abbrev-ref', 'HEAD').stdout.strip()
+
 def git_checkout(branch):
     """Checkout the given branch."""
     run_git_command('checkout', branch)

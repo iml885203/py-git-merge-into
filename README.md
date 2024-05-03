@@ -47,13 +47,13 @@ gmip {branch}
 ## Installation
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/iml885203/git-merge-into/main/install-cli.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/iml885203/git-merge-into/main/install.sh)"
 ```
 
 ## Uninstall
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/iml885203/git-merge-into/main/uninstall-cli.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/iml885203/git-merge-into/main/uninstall.sh)"
 ```
 
 ## Development
@@ -75,7 +75,7 @@ python gmip.py {branch}
 
 ### Build
 ```bash
-./build-cli.sh
+./build.sh
 ```
 
 ### Install Locally
