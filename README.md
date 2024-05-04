@@ -59,7 +59,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/iml885203/git-merge-into
 ## Development
 
 ```
-git clone git@github.com:iml885203/git-merge-into.git
+git clone git@github.com:iml885203/py-git-merge-into.git
 ```
 
 ### Install packages
