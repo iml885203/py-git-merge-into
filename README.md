@@ -1,6 +1,8 @@
 # Git Merge Into
 
 > Useful command, Colorful result!!!
+>
+> If you find windows version, check [Merge Tool](https://github.com/iml885203/DotnetMergeTool)
 
 ## Table of Contents
 
